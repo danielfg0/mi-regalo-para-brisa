@@ -1,0 +1,8 @@
+PON AQUÍ TU CANCIÓN
+
+Copia tu archivo de audio y nómbralo exactamente:
+cancion.mp3
+
+La configuración de index.html ya apunta a: musica/cancion.mp3
+El audio inicia cuando se toca el botón; los celulares no suelen permitir reproducción automática.
+Usa una canción que tengas derecho a compartir.

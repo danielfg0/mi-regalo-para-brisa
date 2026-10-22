@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff7f5">
+  <meta name="description" content="Una sorpresa de cumpleaños hecha con amor.">
+  <title>Feliz cumpleaños, Brisa ♡</title>
+  <style>
+    :root {
+      --cream: #fff9f5;
+      --paper: #fffdfb;
+      --blush: #fbe8e9;
+      --pink: #e7a3b4;
+      --rose: #c45d7b;
+      --rose-deep: #873d59;
+      --wine: #563443;
+      --muted: #9a7d88;
+      --gold: #c49b65;
+      --line: rgba(135, 61, 89, .15);
+      --shadow: 0 22px 65px rgba(108, 52, 76, .12);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 22px; }
+    body {
+      margin: 0; color: var(--wine); font-family: var(--sans); line-height: 1.7; overflow-x: hidden;
+      background: radial-gradient(ellipse at 8% 4%, rgba(248, 215, 224, .65), transparent 32rem),
+                  radial-gradient(ellipse at 96% 28%, rgba(250, 230, 208, .52), transparent 30rem), var(--cream);
+    }
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .19; z-index: -1; background-image: radial-gradient(#d9a6b5 .7px, transparent .7px); background-size: 17px 17px; }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--rose); outline-offset: 4px; }
+    button { -webkit-tap-highlight-color: transparent; }
+    img { max-width: 100%; }
+    .wrap { width: min(1080px, calc(100% - 36px)); margin-inline: auto; }
+    .topbar { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px 12px 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .18em; font-size: .68rem; text-align: center; }
+    .topbar .heart { color: var(--rose); font-size: 1rem; }
+    .eyebrow { color: var(--rose-deep); font-weight: 750; text-transform: uppercase; letter-spacing: .2em; font-size: .68rem; }
+    .serif { font-family: var(--serif); font-weight: 400; }
+    .hero { min-height: min(850px, 91svh); min-height: min(850px, 91vh); display: grid; place-items: center; position: relative; isolation: isolate; text-align: center; padding: 50px 0 84px; }
+    .hero-inner { max-width: 810px; position: relative; z-index: 2; }
+    .birthday-stamp { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(196,93,123,.24); border-radius: 99px; background: rgba(255,255,255,.66); color: var(--rose-deep); padding: 9px 15px; font-size: .77rem; box-shadow: 0 8px 25px rgba(108,52,76,.05); animation: fade-up .8s both; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.3rem, 10vw, 7.1rem); letter-spacing: -.065em; line-height: .94; margin: 27px 0 24px; animation: fade-up .9s .08s both; }
+    h1 em { color: var(--rose); font-weight: 400; }
+    .hero-copy { max-width: 540px; color: #8b6d79; margin: 0 auto 29px; font-size: clamp(1rem, 2.4vw, 1.15rem); animation: fade-up .9s .16s both; }
+    .signature-line { margin: -9px auto 30px; color: var(--rose-deep); font: italic 1.1rem var(--serif); animation: fade-up .9s .21s both; }
+    .actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 11px; animation: fade-up .9s .24s both; }
+    .button { appearance: none; border: 1px solid rgba(196,93,123,.28); border-radius: 99px; padding: 13px 21px; display: inline-flex; justify-content: center; align-items: center; gap: 9px; text-decoration: none; cursor: pointer; color: var(--rose-deep); background: rgba(255,255,255,.78); box-shadow: 0 9px 25px rgba(108,52,76,.08); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-3px); box-shadow: 0 13px 30px rgba(108,52,76,.14); }
+    .button.primary { background: var(--rose); border-color: var(--rose); color: white; }
+    .button.primary:hover { background: var(--rose-deep); }
+    .hero-deco { position: absolute; pointer-events: none; z-index: -1; user-select: none; }
+    .deco-heart { font-family: var(--serif); color: rgba(196,93,123,.18); animation: float 6s ease-in-out infinite; }
+    .heart-a { left: 4%; top: 22%; font-size: clamp(5rem, 11vw, 9rem); transform: rotate(-17deg); }
+    .heart-b { right: 5%; top: 20%; font-size: clamp(3.6rem, 8vw, 6.8rem); animation-delay: -2s; }
+    .flower-a { left: 12%; bottom: 13%; color: rgba(196,155,101,.36); font-size: clamp(3rem, 7vw, 5rem); animation: float 8s ease-in-out infinite reverse; }
+    .flower-b { right: 10%; bottom: 15%; color: rgba(196,93,123,.24); font-size: clamp(2.8rem, 6vw, 4.5rem); animation: float 7s ease-in-out infinite; }
+    .scroll-cue { position: absolute; bottom: 19px; left: 50%; transform: translateX(-50%); color: #a78a95; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
+    .scroll-cue span { display: block; font-size: 1rem; animation: nudge 1.5s infinite; }
+    section.section { padding: 86px 0; }
+    .heading { max-width: 660px; text-align: center; margin: 0 auto 38px; }
+    .ornament { color: var(--rose); letter-spacing: .45em; font-size: .95rem; margin-bottom: 9px; }
+    .heading h2 { font: 400 clamp(2.4rem, 6.5vw, 4.2rem)/1.04 var(--serif); letter-spacing: -.045em; margin: 12px 0 14px; }
+    .heading p { color: var(--muted); margin: 0; }
+    .birthday-note { max-width: 790px; margin: 0 auto; border: 1px solid var(--line); border-radius: 22px; padding: 23px 28px; text-align: center; background: rgba(255,255,255,.67); box-shadow: 0 12px 40px rgba(108,52,76,.06); }
+    .birthday-note p { margin: 0; font: italic clamp(1.25rem, 3vw, 1.75rem)/1.55 var(--serif); color: #805465; }
+    .birthday-note .small-heart { display: inline-block; color: var(--rose); margin: 0 7px; }
+    .letter-layout { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(25px, 5vw, 58px); max-width: 900px; margin: 0 auto; }
+    .envelope-side { text-align: center; }
+    .envelope { display: block; position: relative; width: min(100%, 370px); height: 245px; margin: 0 auto 12px; background: none; border: 0; padding: 0; cursor: pointer; filter: drop-shadow(0 18px 20px rgba(108,52,76,.13)); perspective: 900px; }
+    .env-back { position: absolute; inset: 20px 0 0; background: #eab6c5; border-radius: 11px; }
+    .env-note { position: absolute; z-index: 2; left: 8%; top: 29px; width: 84%; height: 178px; display: grid; place-content: center; background: #fffdf9; border: 1px solid rgba(196,155,101,.4); border-radius: 6px; color: var(--rose-deep); font: italic 1.35rem var(--serif); transition: transform .8s cubic-bezier(.2,.8,.2,1); padding: 16px; }
+    .env-flap { position: absolute; top: 20px; left: 0; width: 100%; height: 140px; background: #f4cbd6; clip-path: polygon(0 0,100% 0,50% 100%); transform-origin: top; transition: transform .8s cubic-bezier(.2,.8,.2,1); z-index: 4; }
+    .env-pocket { position: absolute; inset: 58px 0 0; background: linear-gradient(145deg,#f8dbe3,#eab2c3); clip-path: polygon(0 0,50% 60%,100% 0,100% 100%,0 100%); border-radius: 0 0 11px 11px; z-index: 3; }
+    .env-seal { position: absolute; z-index: 5; left: 50%; top: 106px; transform: translateX(-50%); width: 47px; height: 47px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--rose); box-shadow: 0 6px 16px rgba(135,61,89,.23); font-size: 1.5rem; transition: opacity .25s ease; }
+    .envelope.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+    .envelope.open .env-note { transform: translateY(-70px); }
+    .envelope.open .env-seal { opacity: 0; }
+    .tap-note { color: var(--muted); font-size: .82rem; margin: 0; }
+    .letter-card { display: none; padding: clamp(25px, 4vw, 39px); background: rgba(255,255,255,.84); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .letter-card.visible { display: block; animation: letter-reveal .7s cubic-bezier(.2,.8,.2,1) both; }
+    .letter-card::after { content: "♡"; position: absolute; right: 11px; bottom: -61px; color: rgba(196,93,123,.07); font: 10rem var(--serif); pointer-events: none; }
+    .letter-card h3 { position: relative; z-index: 1; font: italic 2rem var(--serif); color: var(--rose-deep); margin: 0 0 18px; }
+    .letter-card p { position: relative; z-index: 1; color: #755766; white-space: pre-line; margin: 0 0 16px; }
+    .letter-card .signature { position: relative; z-index: 1; color: var(--rose-deep); font: italic 1.45rem var(--serif); margin-top: 23px; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+    .photo-card { background: var(--paper); padding: 11px 11px 17px; border: 1px solid rgba(135,61,89,.1); border-radius: 13px; box-shadow: 0 13px 35px rgba(108,52,76,.08); transform: rotate(var(--tilt,0deg)); transition: transform .25s ease, box-shadow .25s ease; }
+    .photo-card:hover { transform: translateY(-6px) rotate(0deg); box-shadow: var(--shadow); }
+    .photo-frame { position: relative; overflow: hidden; aspect-ratio: 4 / 4.8; border-radius: 8px; background: linear-gradient(145deg,#f6d4de,#f9e9df 60%,#e9d8e9); display: grid; place-items: center; }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .photo-placeholder { padding: 18px; text-align: center; color: #9e667a; font: italic 1.2rem/1.5 var(--serif); }
+    .photo-placeholder small { display: block; font: .68rem/1.5 var(--sans); color: #a67f8d; margin-top: 8px; }
+    .photo-caption { text-align: center; color: #896e7a; font: italic 1.2rem var(--serif); margin: 14px 5px 0; }
+    .timeline { max-width: 750px; margin: 0 auto; position: relative; }
+    .timeline::before { content: ""; position: absolute; width: 1px; top: 6px; bottom: 8px; left: 17px; background: linear-gradient(var(--pink),rgba(231,163,180,.15)); }
+    .moment { display: grid; grid-template-columns: 37px 1fr; gap: 17px; position: relative; padding: 0 0 30px; }
+    .moment:last-child { padding-bottom: 0; }
+    .moment-dot { z-index: 1; margin: 7px 0 0 11px; width: 13px; height: 13px; border: 3px solid var(--cream); border-radius: 50%; background: var(--rose); box-shadow: 0 0 0 1px #e7a3b4; }
+    .moment time { display: block; color: var(--rose-deep); font-size: .69rem; font-weight: 750; text-transform: uppercase; letter-spacing: .15em; margin-bottom: 3px; }
+    .moment h3 { font: 1.55rem var(--serif); margin: 0 0 4px; color: var(--wine); }
+    .moment p { color: var(--muted); margin: 0; }
+    .counter { max-width: 780px; margin: 0 auto; padding: clamp(31px, 6vw, 55px) 25px; border-radius: 27px; overflow: hidden; position: relative; text-align: center; color: white; background: linear-gradient(125deg,#91445f,#c96784 57%,#d99aa7); box-shadow: 0 23px 55px rgba(135,61,89,.2); }
+    .counter::before, .counter::after { content: "♡"; position: absolute; font: 10rem var(--serif); opacity: .12; line-height: 1; }
+    .counter::before { left: -8px; top: -25px; transform: rotate(-18deg); }
+    .counter::after { right: -8px; bottom: -41px; transform: rotate(15deg); }
+    .counter-label { position: relative; z-index: 1; text-transform: uppercase; letter-spacing: .18em; font-size: .69rem; opacity: .92; }
+    .counter-number { position: relative; z-index: 1; font: clamp(4rem, 15vw, 7.5rem)/1.05 var(--serif); letter-spacing: -.06em; margin: 15px 0 7px; }
+    .counter-caption { position: relative; z-index: 1; margin: 0; opacity: .95; }
+    .surprise-box { max-width: 780px; margin: 0 auto; border: 1px solid rgba(196,93,123,.18); background: linear-gradient(145deg,rgba(255,255,255,.84),rgba(255,239,241,.82)); border-radius: 25px; box-shadow: 0 16px 45px rgba(108,52,76,.07); padding: clamp(25px, 5vw, 45px); text-align: center; }
+    .gift-icon { display: grid; place-items: center; margin: 0 auto 15px; width: 76px; height: 76px; border-radius: 50%; background: #f7dce4; color: var(--rose-deep); font-size: 2.1rem; animation: gift-wiggle 3s ease-in-out infinite; }
+    .surprise-box h3 { font: 400 clamp(1.8rem, 5vw, 2.5rem)/1.15 var(--serif); margin: 8px 0 10px; }
+    .surprise-box p { color: var(--muted); margin: 0 auto 22px; max-width: 530px; }
+    .surprise-message { display: none; max-width: 540px; margin: 23px auto 0; padding-top: 20px; border-top: 1px solid var(--line); font: italic clamp(1.35rem, 3.5vw, 1.8rem)/1.5 var(--serif); color: var(--rose-deep); }
+    .surprise-message.visible { display: block; animation: fade-up .5s both; }
+    .coupon-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; }
+    .coupon { display: block; width: 100%; min-height: 212px; border: 1px dashed #d69aaa; border-radius: 15px; padding: 21px; color: var(--wine); background: rgba(255,255,255,.82); text-align: left; cursor: pointer; position: relative; transition: transform .2s, box-shadow .2s; }
+    .coupon:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .coupon-icon { color: var(--rose); font-size: 1.8rem; }
+    .coupon h3 { font: 1.4rem/1.2 var(--serif); margin: 10px 0 7px; }
+    .coupon p { color: var(--muted); font-size: .87rem; line-height: 1.55; margin: 0; }
+    .coupon-label { display: block; color: var(--rose-deep); margin-top: 16px; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; font-weight: 800; }
+    .coupon.redeemed { background: #f6f1f1; opacity: .78; }
+    .coupon.redeemed .coupon-label { color: #64806d; }
+    .closing { text-align: center; padding: 86px 0 60px; }
+    .closing .closing-heart { color: var(--rose); font-size: 1.35rem; animation: heartbeat 1.8s infinite; display: inline-block; }
+    .closing h2 { font: italic 400 clamp(2.8rem,8vw,5rem)/1.05 var(--serif); color: var(--rose-deep); letter-spacing: -.04em; margin: 15px 0; }
+    .closing p { color: var(--muted); margin-bottom: 24px; }
+    footer { text-align: center; padding: 22px 0 calc(32px + env(safe-area-inset-bottom)); color: #ab8e99; font-size: .74rem; }
+    .music-button { position: fixed; z-index: 30; right: max(15px, env(safe-area-inset-right)); bottom: max(15px, env(safe-area-inset-bottom)); border: 1px solid rgba(196,93,123,.22); background: rgba(255,253,251,.94); color: var(--rose-deep); border-radius: 99px; padding: 11px 15px; box-shadow: 0 8px 27px rgba(108,52,76,.16); cursor: pointer; backdrop-filter: blur(10px); font-size: .83rem; }
+    .toast { position: fixed; z-index: 50; left: 50%; bottom: calc(78px + env(safe-area-inset-bottom)); transform: translate(-50%, 12px); opacity: 0; pointer-events: none; background: #563443; color: white; padding: 11px 17px; border-radius: 99px; font-size: .86rem; text-align: center; width: max-content; max-width: calc(100% - 30px); transition: opacity .2s ease, transform .2s ease; box-shadow: 0 9px 28px rgba(50,20,35,.18); }
+    .toast.show { opacity: 1; transform: translate(-50%,0); }
+    .confetti-piece { position: fixed; top: -20px; z-index: 100; pointer-events: none; animation: confetti-fall var(--fall-time, 3s) linear forwards; font-size: var(--size, 18px); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+    @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+    @keyframes letter-reveal { from { opacity: 0; transform: translateY(22px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 12% { transform: scale(1.18); } 24% { transform: scale(1); } 36% { transform: scale(1.12); } }
+    @keyframes gift-wiggle { 0%,90%,100% { transform: rotate(0); } 93% { transform: rotate(-7deg); } 96% { transform: rotate(7deg); } }
+    @keyframes confetti-fall { to { transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(760deg); opacity: .1; } }
+    @media (max-width: 760px) {
+      .hero { min-height: 84svh; padding: 35px 0 70px; }
+      .heart-a { left: -5%; top: 16%; } .heart-b { right: -3%; top: 13%; }
+      .flower-a { left: 2%; bottom: 11%; } .flower-b { right: 2%; bottom: 10%; }
+      section.section { padding: 65px 0; }
+      .letter-layout { grid-template-columns: 1fr; max-width: 570px; gap: 20px; }
+      .envelope { max-width: 340px; height: 225px; }
+      .letter-card { margin-top: 9px; }
+      .photo-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
+      .photo-card:last-child { grid-column: 1 / -1; width: min(73%,300px); justify-self: center; }
+      .coupon-grid { grid-template-columns: 1fr; }
+      .coupon { min-height: 0; }
+      .coupon-label { margin-top: 12px; }
+    }
+    @media (max-width: 390px) {
+      .wrap { width: calc(100% - 26px); }
+      .hero { min-height: 82svh; }
+      .birthday-stamp { font-size: .67rem; padding: 8px 11px; }
+      .actions { flex-direction: column; width: 100%; }
+      .actions .button { width: min(100%,300px); }
+      .photo-grid { gap: 9px; }
+      .photo-card { padding: 7px 7px 12px; }
+      .photo-caption { font-size: 1.05rem; }
+      .letter-card { padding: 24px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Dedicatoria"><span class="heart" aria-hidden="true">♡</span><span>Un pequeño universo para ti</span><span class="heart" aria-hidden="true">♡</span></header>
+
+  <main>
+    <section class="hero wrap" id="inicio" aria-labelledby="hero-title">
+      <span class="hero-deco deco-heart heart-a" aria-hidden="true">♡</span>
+      <span class="hero-deco deco-heart heart-b" aria-hidden="true">♡</span>
+      <span class="hero-deco flower-a" aria-hidden="true">✿</span>
+      <span class="hero-deco flower-b" aria-hidden="true">✧</span>
+      <div class="hero-inner">
+        <div class="birthday-stamp"><span aria-hidden="true">✦</span> Hoy celebramos a alguien increíble <span aria-hidden="true">✦</span></div>
+        <h1 id="hero-title">Feliz cumpleaños,<br><em>mi Brisa.</em></h1>
+        <p class="hero-copy" id="hero-subtitle">Hoy el día es más bonito porque se celebra tu existencia. Preparé este pequeño rincón para recordarte lo muchísimo que te quiero.</p>
+        <p class="signature-line" id="hero-signature">Con todo mi amor, Daniel ♡</p>
+        <div class="actions">
+          <button class="button primary" id="open-letter-button" type="button">Abrir tu sorpresa <span aria-hidden="true">♡</span></button>
+          <a class="button" href="#recuerdos">Nuestros recuerdos <span aria-hidden="true">↘</span></a>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">Hay más para ti <span>⌄</span></div>
+    </section>
+
+    <section class="section wrap reveal" aria-label="Un deseo para tu cumpleaños">
+      <div class="birthday-note"><p>“Que la vida te regale tantas razones para sonreír como las que tú le regalas a mi corazón.” <span class="small-heart">♡</span></p></div>
+    </section>
+
+    <section class="section wrap" id="carta">
+      <div class="heading reveal">
+        <div class="ornament">✧ · ♡ · ✧</div>
+        <div class="eyebrow">De mi corazón al tuyo</div>
+        <h2>Una carta para mi persona favorita</h2>
+        <p>Hay cosas que quiero que puedas volver a leer siempre que las necesites.</p>
+      </div>
+      <div class="letter-layout">
+        <div class="envelope-side reveal">
+          <button class="envelope" id="envelope" type="button" aria-label="Abrir el sobre de la carta" aria-expanded="false">
+            <span class="env-back"></span><span class="env-note">Unas palabras<br>solo para ti…</span><span class="env-flap"></span><span class="env-pocket"></span><span class="env-seal" aria-hidden="true">♡</span>
+          </button>
+          <p class="tap-note">Toca el sobre para abrir tu carta</p>
+        </div>
+        <article class="letter-card" id="letter-card" aria-live="polite">
+          <h3 id="letter-greeting">Mi Brisa bonita,</h3>
+          <p id="letter-text">Feliz cumpleaños, mi amor.
+
+Hoy quiero recordarte lo especial que eres para mí. Me hace feliz poder coincidir contigo en este mundo tan grande y tener la oportunidad de compartir momentos, risas, abrazos y sueños a tu lado.
+
+Deseo que este nuevo año de vida te traiga tranquilidad, salud, alegría y muchas cosas bonitas. Que nunca te falten motivos para sentirte orgullosa de ti, personas que te quieran bonito y sueños que te emocionen.
+
+Gracias por ser tú, por tu forma de hacer especiales hasta los días más simples y por ocupar un lugar tan bonito en mi corazón. Ojalá esta página te saque una sonrisa hoy y cada vez que vuelvas a ella.
+
+Te mereces un cumpleaños precioso y una vida llena de amor. Y yo espero poder seguir acompañándote en muchos de esos momentos.</p>
+          <div class="signature" id="letter-signature">Con todo mi amor, Daniel ♡</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="recuerdos">
+      <div class="heading reveal">
+        <div class="ornament">✧ · ♡ · ✧</div><div class="eyebrow">Momentos que guardo</div>
+        <h2>Nuestros recuerdos</h2>
+        <p>Unas fotos de nosotros y de esos instantes que quisiera poder guardar en un frasquito.</p>
+      </div>
+      <!-- EDITA LAS FOTOS: coloca foto-1.jpg, foto-2.jpg y foto-3.jpg dentro de la carpeta fotos/ -->
+      <div class="photo-grid">
+        <article class="photo-card reveal" style="--tilt:-2deg"><div class="photo-frame"><img src="fotos/foto-1.jpg" alt="Un recuerdo especial de Brisa y Daniel"><div class="photo-placeholder">Nuestro primer recuerdo ♡<small>Agrega fotos/foto-1.jpg</small></div></div><p class="photo-caption">Un día para guardar</p></article>
+        <article class="photo-card reveal" style="--tilt:1.5deg"><div class="photo-frame"><img src="fotos/foto-2.jpg" alt="Un momento bonito juntos"><div class="photo-placeholder">Un momento feliz ♡<small>Agrega fotos/foto-2.jpg</small></div></div><p class="photo-caption">De mis favoritos</p></article>
+        <article class="photo-card reveal" style="--tilt:-1deg"><div class="photo-frame"><img src="fotos/foto-3.jpg" alt="Otro recuerdo de la pareja"><div class="photo-placeholder">Y muchos más por venir ♡<small>Agrega fotos/foto-3.jpg</small></div></div><p class="photo-caption">Nuestra historia sigue</p></article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="historia">
+      <div class="heading reveal"><div class="ornament">✧ · ♡ · ✧</div><div class="eyebrow">Capítulos de nuestra historia</div><h2>Pequeños momentos, mucho amor</h2><p>Puedes cambiar estos recuerdos por fechas y momentos reales de ustedes.</p></div>
+      <!-- EDITA LOS RECUERDOS: cambia títulos, fechas y descripciones de cada bloque moment. -->
+      <div class="timeline">
+        <article class="moment reveal"><span class="moment-dot" aria-hidden="true"></span><div><time datetime="2023-03-14">14 de marzo de 2023</time><h3>Cuando empezó algo bonito</h3><p>Ese día comenzó una historia que hoy me alegra seguir construyendo contigo.</p></div></article>
+        <article class="moment reveal"><span class="moment-dot" aria-hidden="true"></span><div><time>Un día que llevo conmigo</time><h3>Una sonrisa que no olvido</h3><p>Hay momentos sencillos que se quedan en el corazón mucho más de lo que imaginamos.</p></div></article>
+        <article class="moment reveal"><span class="moment-dot" aria-hidden="true"></span><div><time>Todo lo que viene</time><h3>Más recuerdos por crear</h3><p>Nos quedan lugares que visitar, abrazos pendientes y muchísimas historias que vivir.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="contador">
+      <div class="counter reveal">
+        <div class="counter-label">Desde que empezó nuestra historia</div>
+        <div class="counter-number" id="days-count">♡</div>
+        <p class="counter-caption" id="days-caption">días compartiendo recuerdos</p>
+      </div>
+    </section>
+
+    <section class="section wrap" id="sorpresa">
+      <div class="heading reveal"><div class="ornament">✧ · ♡ · ✧</div><div class="eyebrow">Una sorpresa pequeñita</div><h2>Hay algo más para ti</h2><p>Porque tu cumpleaños merece al menos un poquito de magia.</p></div>
+      <div class="surprise-box reveal">
+        <div class="gift-icon" aria-hidden="true">🎁</div>
+        <h3>¿Lista para pedir un deseo?</h3>
+        <p>Respira profundo, pide algo bonito en silencio y toca el botón. Este momento es tuyo, Brisa.</p>
+        <button class="button primary" id="wish-button" type="button">Pedir mi deseo ✨</button>
+        <div class="surprise-message" id="surprise-message" aria-live="polite">Deseo que la vida te abrace bonito, que tus sueños encuentren camino y que nunca olvides lo muchísimo que vales. Feliz cumpleaños, mi amor. ♡</div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="vales">
+      <div class="heading reveal"><div class="ornament">✧ · ♡ · ✧</div><div class="eyebrow">Vales válidos por cariño</div><h2>Cupones para mi Brisa</h2><p>Toca uno para canjearlo. Los canjes se guardan solo en el navegador de este dispositivo.</p></div>
+      <div class="coupon-grid">
+        <button type="button" class="coupon reveal" data-coupon="abrazo"><span class="coupon-icon" aria-hidden="true">♡</span><h3>Vale por un abrazo</h3><p>Un abrazo largo, sin prisa y de esos que hacen sentir que todo está bien.</p><span class="coupon-label">Toca para canjear →</span></button>
+        <button type="button" class="coupon reveal" data-coupon="cita"><span class="coupon-icon" aria-hidden="true">☕</span><h3>Vale por una cita</h3><p>Un plan bonito juntos, elegido entre los dos y disfrutado sin mirar el reloj.</p><span class="coupon-label">Toca para canjear →</span></button>
+        <button type="button" class="coupon reveal" data-coupon="beso"><span class="coupon-icon" aria-hidden="true">💌</span><h3>Vale por besitos</h3><p>Canjeable cuando quieras un poquito más de amor y apapachos.</p><span class="coupon-label">Toca para canjear →</span></button>
+      </div>
+    </section>
+
+    <section class="closing wrap reveal">
+      <span class="closing-heart" aria-hidden="true">♡</span>
+      <h2>Feliz cumpleaños,<br>mi Brisa.</h2>
+      <p>Gracias por existir y por hacer más bonito mi mundo.<br>Que este sea uno de muchos cumpleaños que celebremos.</p>
+      <button class="button" id="back-to-top" type="button">Volver al principio ↑</button>
+    </section>
+  </main>
+
+  <footer>Hecho con amor para Brisa <span style="color:var(--rose)">♥</span> · Un detalle de Daniel</footer>
+  <button class="music-button" id="music-button" type="button" hidden aria-pressed="false">♫ Reproducir canción</button>
+  <audio id="background-music" loop preload="none"></audio>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =============================================================
+       PERSONALIZA TU REGALO AQUÍ
+       1) Cambia nombres y textos si quieres.
+       2) La música debe estar en musica/cancion.mp3.
+       3) La fecha startDate sirve para el contador de días juntos.
+       No borres las comillas ni las comas que separan cada opción.
+       ============================================================= */
+    const CONFIG = {
+      birthdayName: "Brisa",
+      fromName: "Daniel",
+      heroSubtitle: "Hoy el día es más bonito porque se celebra tu existencia. Preparé este pequeño rincón para recordarte lo muchísimo que te quiero.",
+      letterGreeting: "Mi Brisa bonita,",
+      letterText: `Feliz cumpleaños, mi amor.\n\nHoy quiero recordarte lo especial que eres para mí. Me hace feliz poder coincidir contigo en este mundo tan grande y tener la oportunidad de compartir momentos, risas, abrazos y sueños a tu lado.\n\nDeseo que este nuevo año de vida te traiga tranquilidad, salud, alegría y muchas cosas bonitas. Que nunca te falten motivos para sentirte orgullosa de ti, personas que te quieran bonito y sueños que te emocionen.\n\nGracias por ser tú, por tu forma de hacer especiales hasta los días más simples y por ocupar un lugar tan bonito en mi corazón. Ojalá esta página te saque una sonrisa hoy y cada vez que vuelvas a ella.\n\nTe mereces un cumpleaños precioso y una vida llena de amor. Y yo espero poder seguir acompañándote en muchos de esos momentos.`,
+      signature: "Con todo mi amor, Daniel ♡",
+      startDate: "2023-03-14", // Cambia por la fecha real en formato AAAA-MM-DD
+      musicFile: "musica/cancion.mp3" // Ruta relativa; respeta mayúsculas y minúsculas
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[character]);
+    }
+
+    // Sustituye el nombre, dedicatoria y carta desde CONFIG.
+    document.title = `Feliz cumpleaños, ${CONFIG.birthdayName} ♡`;
+    $("#hero-title").innerHTML = `Feliz cumpleaños,<br><em>mi ${escapeHTML(CONFIG.birthdayName)}.</em>`;
+    $("#hero-subtitle").textContent = CONFIG.heroSubtitle;
+    $("#hero-signature").textContent = `Con todo mi amor, ${CONFIG.fromName} ♡`;
+    $("#letter-greeting").textContent = CONFIG.letterGreeting;
+    $("#letter-text").textContent = CONFIG.letterText;
+    $("#letter-signature").textContent = CONFIG.signature;
+    $("footer").innerHTML = `Hecho con amor para ${escapeHTML(CONFIG.birthdayName)} <span style="color:var(--rose)">♥</span> · Un detalle de ${escapeHTML(CONFIG.fromName)}`;
+
+    // Sobre: muestra la carta al tocarlo.
+    const envelope = $("#envelope");
+    const letterCard = $("#letter-card");
+    function openLetter() {
+      envelope.classList.add("open");
+      envelope.setAttribute("aria-expanded", "true");
+      letterCard.classList.add("visible");
+    }
+    envelope.addEventListener("click", openLetter);
+    $("#open-letter-button").addEventListener("click", () => {
+      openLetter();
+      $("#carta").scrollIntoView({ behavior: "smooth", block: "start" });
+      window.setTimeout(() => letterCard.scrollIntoView({ behavior: "smooth", block: "center" }), 450);
+    });
+    $("#back-to-top").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // Fotos: muestra el marcador romántico si todavía no se agregó la imagen.
+    $$(".photo-frame").forEach((frame) => {
+      const img = frame.querySelector("img");
+      const placeholder = frame.querySelector(".photo-placeholder");
+      const showPlaceholder = () => { img.hidden = true; placeholder.hidden = false; };
+      placeholder.hidden = true;
+      img.addEventListener("error", showPlaceholder);
+      if (img.complete && img.naturalWidth === 0) showPlaceholder();
+      img.addEventListener("load", () => { img.hidden = false; placeholder.hidden = true; });
+    });
+
+    // Contador de días a partir de la fecha indicada en CONFIG.
+    function updateDays() {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(CONFIG.startDate);
+      if (!match) { $("#days-count").textContent = "♡"; $("#days-caption").textContent = "revisa la fecha startDate en CONFIG"; return; }
+      const start = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const count = Math.floor((today - start) / 86400000);
+      if (!Number.isNaN(start.getTime()) && count >= 0 && start.getFullYear() === Number(match[1]) && start.getMonth() === Number(match[2]) - 1 && start.getDate() === Number(match[3])) {
+        $("#days-count").textContent = count.toLocaleString("es-MX");
+        $("#days-caption").textContent = count === 1 ? "día creando recuerdos juntos" : "días creando recuerdos juntos";
+      } else {
+        $("#days-count").textContent = "♡";
+        $("#days-caption").textContent = "elige la fecha correcta en CONFIG";
+      }
+    }
+    updateDays();
+
+    // Confeti ligero al pedir el deseo (no usa librerías externas).
+    function burstConfetti() {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const pieces = ["♡", "✦", "✿", "♥", "✧"];
+      for (let i = 0; i < 34; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti-piece";
+        piece.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+        piece.style.left = `${Math.random() * 100}vw`;
+        piece.style.color = ["#c45d7b", "#e7a3b4", "#c49b65", "#a95c79", "#e7bfc9"][Math.floor(Math.random() * 5)];
+        piece.style.setProperty("--fall-time", `${2.3 + Math.random() * 2.3}s`);
+        piece.style.setProperty("--drift", `${Math.round(Math.random() * 150 - 75)}px`);
+        piece.style.setProperty("--size", `${12 + Math.random() * 15}px`);
+        document.body.appendChild(piece);
+        window.setTimeout(() => piece.remove(), 5000);
+      }
+    }
+    $("#wish-button").addEventListener("click", () => {
+      $("#surprise-message").classList.add("visible");
+      $("#wish-button").textContent = "Deseo guardado en el corazón ♡";
+      $("#wish-button").disabled = true;
+      burstConfetti();
+    });
+
+    // Vales: el canje se guarda en el dispositivo/navegador actual solamente.
+    const storageKey = `cumple-brisa-coupons-${CONFIG.birthdayName}-${CONFIG.fromName}`;
+    let redeemed = {};
+    try { redeemed = JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch (_) { redeemed = {}; }
+    let toastTimer;
+    function showToast(message) {
+      const toast = $("#toast"); toast.textContent = message; toast.classList.add("show");
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove("show"), 2700);
+    }
+    $$("[data-coupon]").forEach((button) => {
+      const key = button.dataset.coupon;
+      const label = button.querySelector(".coupon-label");
+      const render = (done) => {
+        button.classList.toggle("redeemed", done);
+        label.textContent = done ? "✓ Canjeado en este dispositivo" : "Toca para canjear →";
+        button.setAttribute("aria-pressed", String(done));
+      };
+      render(Boolean(redeemed[key]));
+      button.addEventListener("click", () => {
+        if (redeemed[key]) return;
+        if (!window.confirm("¿Quieres canjear este vale? Se marcará como canjeado solo en este navegador.")) return;
+        redeemed[key] = true;
+        try { localStorage.setItem(storageKey, JSON.stringify(redeemed)); } catch (_) {}
+        render(true); showToast("Vale canjeado. ¡A disfrutarlo! ♡");
+      });
+    });
+
+    // Reproductor de música: requiere tocar el botón por las reglas de los celulares.
+    if (CONFIG.musicFile && CONFIG.musicFile.trim()) {
+      const audio = $("#background-music");
+      const musicButton = $("#music-button");
+      audio.src = CONFIG.musicFile;
+      musicButton.hidden = false;
+      audio.addEventListener("error", () => showToast("No encuentro la canción. Revisa musica/cancion.mp3 en GitHub."));
+      musicButton.addEventListener("click", async () => {
+        try {
+          if (audio.paused) {
+            await audio.play();
+            musicButton.textContent = "Ⅱ Pausar canción";
+            musicButton.setAttribute("aria-pressed", "true");
+          } else {
+            audio.pause(); musicButton.textContent = "♫ Reproducir canción";
+            musicButton.setAttribute("aria-pressed", "false");
+          }
+        } catch (_) { showToast("No se pudo reproducir. Comprueba el archivo MP3 y vuelve a tocar el botón."); }
+      });
+    }
+
+    // Animación de entrada de secciones al desplazarse; el contenido sigue visible si no hay soporte.
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add("in-view"); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 });
+      $$(".reveal").forEach((element) => observer.observe(element));
+    } else {
+      $$(".reveal").forEach((element) => element.classList.add("in-view"));
+    }
+  </script>
+</body>
+</html>

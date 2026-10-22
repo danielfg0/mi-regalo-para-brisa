@@ -1,0 +1,9 @@
+PON AQUÍ TUS FOTOS
+
+Copia tus imágenes a esta carpeta y nómbralas exactamente:
+- foto-1.jpg
+- foto-2.jpg
+- foto-3.jpg
+
+Si utilizas PNG o WebP, cambia también el nombre de archivo en las etiquetas <img> de index.html.
+Las carpetas vacías no suelen aparecer en GitHub; este archivo de instrucciones ayuda a que fotos/ se suba.
