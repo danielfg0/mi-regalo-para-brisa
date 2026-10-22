@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8f6">
+  <meta name="description" content="Una pequeña sorpresa hecha con amor.">
+  <title>Una sorpresa para ti ♡</title>
+  <style>
+    :root {
+      --paper: #fffaf8;
+      --paper-2: #fff1f2;
+      --ink: #49343c;
+      --muted: #866d77;
+      --rose: #c45f7b;
+      --rose-dark: #a94563;
+      --rose-light: #f6dce4;
+      --gold: #c59a68;
+      --line: rgba(132, 77, 96, .17);
+      --shadow: 0 18px 55px rgba(120, 61, 83, .12);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 8% 8%, rgba(246, 220, 228, .62), transparent 31rem),
+        radial-gradient(ellipse at 93% 36%, rgba(255, 235, 215, .55), transparent 29rem),
+        var(--paper);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #bd6682; outline-offset: 4px; }
+    .site-shell { width: min(100% - 32px, 980px); margin: 0 auto; }
+    .topbar { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 22px 0 8px; color: var(--muted); font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; }
+    .tiny-heart { color: var(--rose); font-size: 1rem; }
+
+    .hero { min-height: 90svh; display: grid; place-items: center; text-align: center; padding: 48px 0 64px; position: relative; isolation: isolate; }
+    .hero::before, .hero::after { content: "♡"; position: absolute; z-index: -1; color: rgba(196, 95, 123, .16); font-family: var(--serif); line-height: 1; }
+    .hero::before { font-size: clamp(7rem, 19vw, 13rem); top: 12%; left: -1%; transform: rotate(-18deg); }
+    .hero::after { content: "✳"; font-size: clamp(5rem, 12vw, 8rem); bottom: 10%; right: 2%; color: rgba(197, 154, 104, .20); transform: rotate(16deg); }
+    .eyebrow { color: var(--rose-dark); text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; font-weight: 700; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3rem, 10vw, 6.4rem); line-height: .98; letter-spacing: -.055em; margin: 20px 0 18px; }
+    h1 .amp { color: var(--rose); font-style: italic; }
+    .hero-subtitle { max-width: 470px; margin: 0 auto 32px; color: var(--muted); font-size: clamp(1rem, 2.7vw, 1.15rem); }
+    .pill { border: 1px solid rgba(196, 95, 123, .28); border-radius: 100px; padding: 12px 21px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; color: var(--rose-dark); background: rgba(255, 255, 255, .58); cursor: pointer; box-shadow: 0 8px 25px rgba(120, 61, 83, .07); transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
+    .pill:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 12px 28px rgba(120, 61, 83, .13); }
+    .pill.primary { background: var(--rose); color: white; border-color: var(--rose); }
+    .pill.primary:hover { background: var(--rose-dark); }
+    .scroll-hint { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: #a38c95; font-size: .8rem; letter-spacing: .08em; white-space: nowrap; }
+
+    section.content-section { padding: 74px 0; }
+    .section-heading { text-align: center; margin: 0 auto 34px; max-width: 620px; }
+    .section-heading h2 { font: 400 clamp(2.25rem, 7vw, 3.6rem)/1.05 var(--serif); letter-spacing: -.04em; margin: 12px 0; }
+    .section-heading p { color: var(--muted); margin-bottom: 0; }
+    .ornament { color: var(--rose); letter-spacing: .4em; font-size: 1rem; }
+
+    .letter-wrap { max-width: 740px; margin: 0 auto; }
+    .envelope-stage { display: grid; place-items: center; padding: 20px 0 28px; }
+    .envelope { position: relative; width: min(100%, 390px); height: 230px; border: 0; background: transparent; cursor: pointer; perspective: 900px; padding: 0; filter: drop-shadow(0 20px 24px rgba(120,61,83,.14)); }
+    .envelope-back { position: absolute; inset: 20px 0 0; background: #f1cbd7; border-radius: 9px; }
+    .envelope-pocket { position: absolute; inset: 56px 0 0; background: linear-gradient(145deg, #f8dce4, #edbdcc); clip-path: polygon(0 0, 50% 62%, 100% 0, 100% 100%, 0 100%); border-radius: 0 0 9px 9px; z-index: 3; }
+    .envelope-flap { position: absolute; top: 20px; left: 0; width: 100%; height: 135px; background: #f6d5df; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .8s cubic-bezier(.2,.8,.2,1); z-index: 4; border-radius: 8px 8px 0 0; }
+    .envelope-seal { position: absolute; z-index: 5; left: 50%; top: 104px; transform: translateX(-50%); width: 43px; height: 43px; display: grid; place-items: center; border-radius: 50%; background: var(--rose); color: white; font-size: 1.35rem; transition: opacity .25s ease; box-shadow: 0 5px 12px rgba(130, 49, 76, .2); }
+    .envelope-note { position: absolute; z-index: 2; left: 8%; width: 84%; top: 26px; height: 172px; padding: 23px 18px; display: flex; align-items: center; justify-content: center; background: #fffdfb; border: 1px solid rgba(197,154,104,.38); border-radius: 4px; color: var(--rose-dark); font: italic 1.4rem var(--serif); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+    .envelope.opened .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+    .envelope.opened .envelope-note { transform: translateY(-78px); }
+    .envelope.opened .envelope-seal { opacity: 0; }
+    .letter-card { background: rgba(255,255,255,.78); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); padding: clamp(24px, 6vw, 52px); position: relative; overflow: hidden; }
+    .letter-card::after { content: "♡"; position: absolute; right: 19px; bottom: -54px; font: 10rem var(--serif); color: rgba(196,95,123,.08); pointer-events: none; }
+    .letter-card h3 { font: italic 2rem var(--serif); color: var(--rose-dark); margin-bottom: 20px; }
+    .letter-card p { color: #6c535d; position: relative; z-index: 1; white-space: pre-line; }
+    .signature { font: italic 1.7rem var(--serif); color: var(--rose-dark); margin: 25px 0 0; }
+
+    .memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .memory-card { background: rgba(255,255,255,.8); border: 1px solid var(--line); padding: 10px 10px 17px; border-radius: 12px; transform: rotate(var(--tilt, 0deg)); box-shadow: 0 10px 28px rgba(120,61,83,.08); transition: transform .25s ease; }
+    .memory-card:hover { transform: translateY(-4px) rotate(0deg); }
+    .memory-photo { aspect-ratio: 4 / 4.7; border-radius: 7px; overflow: hidden; display: grid; place-items: center; background: linear-gradient(145deg, #f5d5df, #f9e9df 55%, #e8d5e4); color: #9c6075; text-align: center; padding: 16px; }
+    .memory-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .memory-photo .placeholder { font: italic 1.2rem var(--serif); }
+    .memory-caption { text-align: center; padding: 13px 5px 0; font: italic 1.15rem var(--serif); color: var(--muted); }
+
+    .timeline { max-width: 680px; margin: 0 auto; position: relative; }
+    .timeline::before { content: ""; position: absolute; top: 5px; bottom: 5px; width: 1px; background: #e7bdcb; left: 18px; }
+    .moment { display: grid; grid-template-columns: 38px 1fr; gap: 18px; position: relative; padding: 0 0 27px; }
+    .moment:last-child { padding-bottom: 0; }
+    .moment-dot { width: 13px; height: 13px; border: 3px solid #fff; border-radius: 50%; background: var(--rose); box-shadow: 0 0 0 1px #e5b3c3; margin: 5px 0 0 12px; z-index: 1; }
+    .moment h3 { margin: 0 0 3px; font: 1.45rem var(--serif); }
+    .moment time { display: block; color: var(--rose-dark); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 7px; }
+    .moment p { color: var(--muted); margin: 0; }
+
+    .counter-card { max-width: 690px; margin: 0 auto; padding: clamp(25px, 6vw, 45px); text-align: center; color: white; border-radius: 24px; background: linear-gradient(135deg, #b95675, #d78aa0 62%, #dba8a1); box-shadow: 0 20px 50px rgba(163, 66, 98, .2); position: relative; overflow: hidden; }
+    .counter-card::before { content: "♡"; position: absolute; right: 14px; top: -52px; font: 12rem var(--serif); opacity: .12; }
+    .counter-label { text-transform: uppercase; letter-spacing: .19em; font-size: .72rem; opacity: .9; }
+    .counter-number { font: clamp(4.2rem, 14vw, 7.5rem)/1 var(--serif); margin: 15px 0 10px; letter-spacing: -.06em; }
+    .counter-caption { margin: 0; opacity: .92; }
+
+    .coupon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .coupon { width: 100%; min-height: 200px; text-align: left; background: #fff; border: 1px dashed #d69aad; padding: 20px; border-radius: 14px; position: relative; color: var(--ink); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+    .coupon:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .coupon .coupon-icon { font-size: 1.8rem; }
+    .coupon h3 { font: 1.35rem var(--serif); margin: 9px 0 5px; }
+    .coupon p { color: var(--muted); font-size: .88rem; margin: 0; }
+    .coupon .redeem-label { display: inline-block; margin-top: 16px; color: var(--rose-dark); font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .coupon.redeemed { background: #f7f4f3; opacity: .72; cursor: default; }
+    .coupon.redeemed .redeem-label { color: #6f8877; }
+
+    .closing { text-align: center; padding: 85px 0 55px; }
+    .closing h2 { font: italic 400 clamp(2.7rem, 8vw, 4.5rem)/1.1 var(--serif); color: var(--rose-dark); margin: 15px 0; }
+    .closing p { color: var(--muted); }
+    footer { text-align: center; color: #aa929c; padding: 25px 0 35px; font-size: .75rem; }
+    .music-button { position: fixed; z-index: 20; right: 16px; bottom: 16px; border: 1px solid rgba(196,95,123,.25); color: var(--rose-dark); background: rgba(255,250,248,.94); border-radius: 100px; padding: 11px 15px; box-shadow: 0 7px 24px rgba(120,61,83,.12); cursor: pointer; }
+    .toast { position: fixed; z-index: 30; left: 50%; bottom: 76px; transform: translate(-50%, 12px); opacity: 0; pointer-events: none; background: #49343c; color: white; padding: 12px 18px; border-radius: 100px; font-size: .9rem; text-align: center; width: max-content; max-width: calc(100% - 32px); transition: opacity .2s ease, transform .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 680px) {
+      .hero { min-height: 82svh; padding-top: 32px; }
+      .hero::before { top: 11%; left: -9%; }
+      .hero::after { bottom: 8%; right: -4%; }
+      section.content-section { padding: 54px 0; }
+      .memory-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .memory-card:last-child { grid-column: 1 / -1; width: min(72%, 270px); justify-self: center; }
+      .coupon-grid { grid-template-columns: 1fr; }
+      .coupon { min-height: 0; }
+      .envelope { height: 205px; }
+      .envelope.opened .envelope-note { transform: translateY(-58px); }
+      .scroll-hint { bottom: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar"><span class="tiny-heart">♡</span><span>Un detalle hecho con amor</span><span class="tiny-heart">♡</span></header>
+
+  <main>
+    <section class="hero site-shell" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow" id="hero-eyebrow">Una sorpresa para alguien especial</div>
+        <h1 id="hero-title">Valentina <span class="amp">&</span><br>Mateo</h1>
+        <p class="hero-subtitle" id="hero-subtitle">Hay personas que hacen que los días normales se vuelvan inolvidables. Esta pequeña página es para ti.</p>
+        <button class="pill primary" id="open-letter-button" type="button">Abrir nuestra carta <span aria-hidden="true">♡</span></button>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">DESLIZA PARA DESCUBRIR ↓</div>
+    </section>
+
+    <section class="content-section site-shell" id="carta">
+      <div class="section-heading">
+        <div class="ornament">✧ ♡ ✧</div>
+        <div class="eyebrow">Unas palabras para ti</div>
+        <h2>De mi corazón al tuyo</h2>
+        <p>Hay cosas que merecen decirse de una forma especial.</p>
+      </div>
+      <div class="letter-wrap">
+        <div class="envelope-stage">
+          <button class="envelope" id="envelope" type="button" aria-label="Abrir el sobre de la carta" aria-expanded="false">
+            <span class="envelope-back"></span>
+            <span class="envelope-note">Tengo algo que decirte…</span>
+            <span class="envelope-flap"></span>
+            <span class="envelope-pocket"></span>
+            <span class="envelope-seal">♡</span>
+          </button>
+          <p style="color:var(--muted);font-size:.85rem;margin:0;text-align:center">Toca el sobre para abrirlo</p>
+        </div>
+        <article class="letter-card" id="letter-card">
+          <h3 id="letter-greeting">Mi persona favorita,</h3>
+          <p id="letter-text">No siempre encuentro las palabras perfectas para explicar lo que siento, pero quería dejarte un pedacito de mi corazón aquí.
+
+Gracias por las risas, por los pequeños momentos y por hacer que incluso los días sencillos tengan algo bonito. Me encanta crear recuerdos contigo y pensar en todos los que todavía nos faltan.
+
+Esta página es solo una forma pequeña de recordarte cuánto significas para mí. Ojalá cada vez que vuelvas aquí encuentres una razón para sonreír.</p>
+          <div class="signature" id="letter-signature">Con todo mi cariño ♡</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section site-shell" id="recuerdos">
+      <div class="section-heading">
+        <div class="ornament">✧ ♡ ✧</div>
+        <div class="eyebrow">Pequeños grandes momentos</div>
+        <h2>Nuestros recuerdos</h2>
+        <p>Unas cuantas imágenes de momentos que quiero guardar cerquita.</p>
+      </div>
+      <div class="memory-grid">
+        <article class="memory-card" style="--tilt:-2deg">
+          <div class="memory-photo"><img src="fotos/foto-1.jpg" alt="Nuestro primer recuerdo" onerror="this.remove();this.parentElement.innerHTML='<span class=&quot;placeholder&quot;>Tu primera foto aquí ♡<br><small style=&quot;font: .75rem system-ui&quot;>fotos/foto-1.jpg</small></span>'"></div>
+          <div class="memory-caption">Un día para recordar</div>
+        </article>
+        <article class="memory-card" style="--tilt:1.5deg">
+          <div class="memory-photo"><img src="fotos/foto-2.jpg" alt="Un momento especial" onerror="this.remove();this.parentElement.innerHTML='<span class=&quot;placeholder&quot;>Un momento especial ♡<br><small style=&quot;font: .75rem system-ui&quot;>fotos/foto-2.jpg</small></span>'"></div>
+          <div class="memory-caption">De mis favoritos</div>
+        </article>
+        <article class="memory-card" style="--tilt:-1deg">
+          <div class="memory-photo"><img src="fotos/foto-3.jpg" alt="Otro recuerdo juntos" onerror="this.remove();this.parentElement.innerHTML='<span class=&quot;placeholder&quot;>Otra foto juntos ♡<br><small style=&quot;font: .75rem system-ui&quot;>fotos/foto-3.jpg</small></span>'"></div>
+          <div class="memory-caption">Y muchos más por venir</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section site-shell" id="historia">
+      <div class="section-heading">
+        <div class="ornament">✧ ♡ ✧</div>
+        <div class="eyebrow">Nuestra pequeña historia</div>
+        <h2>Momentos que nos trajeron aquí</h2>
+        <p>Las fechas son solo números; lo bonito es todo lo que significan.</p>
+      </div>
+      <div class="timeline" id="timeline">
+        <article class="moment"><span class="moment-dot"></span><div><time datetime="2023-03-14">14 de marzo de 2023</time><h3>Cuando empezó algo bonito</h3><p>Ese día comenzó un recuerdo que siempre voy a llevar conmigo.</p></div></article>
+        <article class="moment"><span class="moment-dot"></span><div><time>Un día cualquiera</time><h3>Una de tantas sonrisas</h3><p>Porque a veces los momentos más sencillos terminan siendo los más especiales.</p></div></article>
+        <article class="moment"><span class="moment-dot"></span><div><time>Lo que sigue</time><h3>Todo lo que aún nos espera</h3><p>Más historias, más lugares y muchas razones para celebrar.</p></div></article>
+      </div>
+    </section>
+
+    <section class="content-section site-shell" id="contador">
+      <div class="counter-card">
+        <div class="counter-label">Desde que comenzó nuestra historia</div>
+        <div class="counter-number" id="days-count">—</div>
+        <p class="counter-caption" id="days-caption">días creando recuerdos</p>
+      </div>
+    </section>
+
+    <section class="content-section site-shell" id="vales">
+      <div class="section-heading">
+        <div class="ornament">✧ ♡ ✧</div>
+        <div class="eyebrow">Válidos por abrazos y sonrisas</div>
+        <h2>Vales para ti</h2>
+        <p>Toca un vale para marcarlo como canjeado en este dispositivo.</p>
+      </div>
+      <div class="coupon-grid">
+        <button type="button" class="coupon" data-coupon="abrazo"><span class="coupon-icon">♡</span><h3>Vale por un abrazo</h3><p>Un abrazo largo, de esos que arreglan el día.</p><span class="redeem-label">Toca para canjear →</span></button>
+        <button type="button" class="coupon" data-coupon="cita"><span class="coupon-icon">☕</span><h3>Vale por una cita</h3><p>Un plan juntos, elegido entre los dos.</p><span class="redeem-label">Toca para canjear →</span></button>
+        <button type="button" class="coupon" data-coupon="beso"><span class="coupon-icon">💌</span><h3>Vale por un beso</h3><p>Canjeable cuando más lo necesites.</p><span class="redeem-label">Toca para canjear →</span></button>
+      </div>
+    </section>
+
+    <section class="closing site-shell">
+      <div class="ornament">♡</div>
+      <h2>Esto es solo el comienzo</h2>
+      <p>Gracias por formar parte de mi historia.</p>
+      <button class="pill" id="back-to-top" type="button">Volver al principio ↑</button>
+    </section>
+  </main>
+
+  <footer>Hecho con cariño <span style="color:var(--rose)">♥</span> para una persona especial.</footer>
+  <button class="music-button" id="music-button" type="button" hidden aria-pressed="false">♫ Reproducir música</button>
+  <audio id="background-music" loop preload="none"></audio>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* ==========================================================
+       PERSONALIZA AQUÍ TU PÁGINA
+       Cambia los textos, nombres y fecha. Para añadir música,
+       escribe el nombre de tu archivo en musicFile y súbelo a
+       la carpeta musica/ (por ejemplo: "musica/cancion.mp3").
+       ========================================================== */
+    const CONFIG = {
+      name1: "Valentina",
+      name2: "Mateo",
+      heroSubtitle: "Hay personas que hacen que los días normales se vuelvan inolvidables. Esta pequeña página es para ti.",
+      letterGreeting: "Mi persona favorita,",
+      letterText: `No siempre encuentro las palabras perfectas para explicar lo que siento, pero quería dejarte un pedacito de mi corazón aquí.\n\nGracias por las risas, por los pequeños momentos y por hacer que incluso los días sencillos tengan algo bonito. Me encanta crear recuerdos contigo y pensar en todos los que todavía nos faltan.\n\nEsta página es solo una forma pequeña de recordarte cuánto significas para mí. Ojalá cada vez que vuelvas aquí encuentres una razón para sonreír.`,
+      signature: "Con todo mi cariño ♡",
+      startDate: "2023-03-14", // Formato: AAAA-MM-DD
+      musicFile: "" // Ejemplo: "musica/cancion.mp3". Déjalo vacío si no usarás música.
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+    const heroTitle = $("#hero-title");
+    heroTitle.innerHTML = `${escapeHTML(CONFIG.name1)} <span class="amp">&</span><br>${escapeHTML(CONFIG.name2)}`;
+    $("#hero-subtitle").textContent = CONFIG.heroSubtitle;
+    $("#letter-greeting").textContent = CONFIG.letterGreeting;
+    $("#letter-text").textContent = CONFIG.letterText;
+    $("#letter-signature").textContent = CONFIG.signature;
+    document.title = `${CONFIG.name1} & ${CONFIG.name2} ♡`;
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    // Sobre interactivo y botón que lleva hasta la carta.
+    const envelope = $("#envelope");
+    function openEnvelope() {
+      envelope.classList.add("opened");
+      envelope.setAttribute("aria-expanded", "true");
+    }
+    envelope.addEventListener("click", openEnvelope);
+    $("#open-letter-button").addEventListener("click", () => {
+      openEnvelope();
+      $("#carta").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    $("#back-to-top").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // Contador de días desde la fecha indicada en CONFIG.startDate.
+    function updateDays() {
+      const start = new Date(`${CONFIG.startDate}T00:00:00`);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const count = Math.floor((today - start) / 86400000);
+      if (!Number.isNaN(start.getTime()) && count >= 0) {
+        $("#days-count").textContent = count.toLocaleString("es-MX");
+      } else {
+        $("#days-count").textContent = "♡";
+        $("#days-caption").textContent = "elige la fecha de inicio en CONFIG";
+      }
+    }
+    updateDays();
+
+    // Los vales guardan su estado en ESTE navegador/dispositivo solamente.
+    // Para compartir el canje entre diferentes celulares hace falta backend.
+    const storageKey = `love-coupons-${CONFIG.name1}-${CONFIG.name2}`;
+    let redeemed = {};
+    try { redeemed = JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch (_) { redeemed = {}; }
+    function renderCoupon(button, isRedeemed) {
+      button.classList.toggle("redeemed", isRedeemed);
+      const label = button.querySelector(".redeem-label");
+      label.textContent = isRedeemed ? "✓ Canjeado en este dispositivo" : "Toca para canjear →";
+      button.setAttribute("aria-pressed", String(isRedeemed));
+    }
+    document.querySelectorAll("[data-coupon]").forEach((button) => {
+      const key = button.dataset.coupon;
+      renderCoupon(button, Boolean(redeemed[key]));
+      button.addEventListener("click", () => {
+        if (redeemed[key]) return;
+        const ok = window.confirm("¿Quieres marcar este vale como canjeado? Esto se guarda solo en este navegador.");
+        if (!ok) return;
+        redeemed[key] = true;
+        try { localStorage.setItem(storageKey, JSON.stringify(redeemed)); } catch (_) {}
+        renderCoupon(button, true);
+        showToast("¡Vale canjeado! Guarden este momento ♡");
+      });
+    });
+
+    // Mensaje corto accesible tras canjear un vale.
+    let toastTimer;
+    function showToast(message) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    // El audio solo se muestra si configuraste una ruta de archivo.
+    if (CONFIG.musicFile.trim()) {
+      const audio = $("#background-music");
+      const musicButton = $("#music-button");
+      audio.src = CONFIG.musicFile;
+      musicButton.hidden = false;
+      musicButton.addEventListener("click", async () => {
+        try {
+          if (audio.paused) {
+            await audio.play();
+            musicButton.textContent = "Ⅱ Pausar música";
+            musicButton.setAttribute("aria-pressed", "true");
+          } else {
+            audio.pause();
+            musicButton.textContent = "♫ Reproducir música";
+            musicButton.setAttribute("aria-pressed", "false");
+          }
+        } catch (_) {
+          showToast("No se pudo reproducir el audio. Revisa el archivo de música.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

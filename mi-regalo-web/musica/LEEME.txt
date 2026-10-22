@@ -1,0 +1,2 @@
+Opcional: coloca aquí una canción en formato MP3 y configura CONFIG.musicFile como "musica/cancion.mp3" en index.html.
+Usa solamente música propia o que tengas permiso para compartir.
